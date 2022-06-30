@@ -3,62 +3,48 @@ Feature: Login in App
   Background:
     Given Pagina de Log in de un App
 
-  Scenario: Introducir Usuario correcto
-    When Click para introducir el Usuario
-    And El usuario debe de ser un correo electronico
-    And El usuario debe de contener un '@'
-    Then Usuario correcto
+  Scenario Outline: Usuario Correcto o Incorrecto
+    When  Click en introducir usuario
+    And   Introduce <usuario>
+    Then  usuario es <estado>
 
-  Scenario: Introducir Usuario Incorrecto
-    When Click para introducir el Usuario
-    And El usuario no es un correo electronico
-    And El usuario no contiene un '@'
-    Then Usuario incorrecto
+    Examples:
+      | usuario     |    estado     |
+      | abccc.ccc   |   incorrecto  |
+      | ab@cccccc   |   incorrecto  |
+      | abcccccc    |   incorrecto  |
+      | abc@cc.ccc  |   correcto    |
 
-  Scenario: Introducir Contraseña Correcta
-    When Click para introducir la contraseña
-    And La contraseña es mayor a 6 caracteres
-    And La contraseña es menor a 18 caracteres
-    And La contraseña tiene letras en mayusculas
-    And La contraseña tiene letras en minusculas
-    And  La contraseña tiene al menos un numero
-    Then Contraseña correcta
+  Scenario Outline: Contraseña Correcta o Incorrecta
+    When Click en introducir <contraseña>
+    Then Contraseña es <estado>
 
-  Scenario: Introducir Contraseña Incorrecta
-    When Click para introducir la contraseña
-    And La contraseña es menor a 6 caracteres
-    And La contraseña es mayor a 18 caracteres
-    And La contraseña no tiene letras en mayusculas
-    And La contraseña no tiene letras en minusculas
-    And  La contraseña no tiene al menos un numero
-    Then Contraseña Incorrecta
+    Examples:
+      |    contraseña         |    estado     |
+      | aaa                   |   incorrecta  |
+      | aaaaaaaaaaaaaaaaaaa   |   incorrecta  |
+      | AAAAAA                |   incorrecta  |
+      | aaaaaa                |   incorrecta  |
+      | 1Aaaaaaaa             |   correcta    |
 
-  Scenario: Usuario Nuevo
-    When Usuario no esta registrado
+  Scenario: Login erroneo : Usuario Nuevo
+    When  Usuario no esta registrado
+    And   Click en Log in
     Then  Mensaje de error 'Usuario no registrado'
-    When Click en Log in
-    And Mostrar enlace a pagina de registro
+    And   Mostrar enlace a pagina de registro
 
-  Scenario: Usuario Registrado y Contraseña incorrecta
+  Scenario: Login Erroneo : Usuario existe y Contraseña incorrecta
     When Usuario esta registrado
-    And Contraseña incorrecta
-    When Click en Log in
-    Then  Mensaje de error 'Password Incorrecto'
+    And  Contraseña no coincide con la del usuario
+    And  Click en Log in
+    Then Mensaje de error 'Password Incorrecto'
 
-  Scenario: Usuario Registrado y Contraseña no cumple requisitos
-    When Usuario esta registrado
-    And Contraseña no cumple los requisitos
-    When Click en Log in
-    Then  Mensaje de error 'Password no cumple los requisitos'
+  Scenario: Log in Erroneo : Usuario no registrado
+    When El usuario no registrado
+    And  Click en Log in
+    Then Mensaje de error 'Usuario no es correo valido'
 
-  Scenario: Log in Exitoso
-    When Usuario esta registrado
-    And La contraseña es correcta
-    And Click en log-in
-    Then  Cargar pagina de incio de perfil de usuario
 
-    Scenario: Log in Erroneo
-      When Usuario incorrecto
-      And Contraseña incorrecta
-      When Click en Log in
-      Then Log in Erroneo
+
+
+    

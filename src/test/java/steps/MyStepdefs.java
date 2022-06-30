@@ -62,8 +62,6 @@ public class MyStepdefs implements En {
             stratio_page.click_Solutions();
             stratio_page.click_Governance();
         });
-
-
         Then("Imprimo Titulo de primer caso de uso", () -> {
             //ESPERAR A QUE CARGUE Y COMPROBAR LA PAGINA
             //IMPRIMIR EL TITULO DEL PRIMER USE CASE
