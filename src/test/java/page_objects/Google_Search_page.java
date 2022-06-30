@@ -17,8 +17,8 @@ public class Google_Search_page extends Base_page {
 
     public void click_first_result_and_check(String url) {
         //comprobar y despues click
-        WebElement getFirst_result_url_aux = driver.findElement(getFirst_result_url);
-        assertEquals(url, getFirst_result_url_aux.getAttribute("href"));
+        String getFirst_result_url_aux = driver.findElement(getFirst_result_url).getAttribute("href");
+        assertEquals(url, getFirst_result_url_aux);
         this.driver.findElement(first_result).click();
     }
 }

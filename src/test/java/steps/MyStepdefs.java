@@ -60,9 +60,7 @@ public class MyStepdefs implements En {
             //CLICK EN SOLUCIONES DROP DOWN
             Stratio_page stratio_page = new Stratio_page(driver);
             stratio_page.click_Solutions();
-            Thread.sleep(3000);
             stratio_page.click_Governance();
-            Thread.sleep(3000);
         });
 
 
@@ -70,7 +68,7 @@ public class MyStepdefs implements En {
             //ESPERAR A QUE CARGUE Y COMPROBAR LA PAGINA
             //IMPRIMIR EL TITULO DEL PRIMER USE CASE
             Governance_page governance_page = new Governance_page(driver);
-            Thread.sleep(9000);
+            Thread.sleep(4000);
             governance_page.check_governance("Data reliability is the base of successful companies");
             governance_page.getTitleCasoUso();
         });
