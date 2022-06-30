@@ -1,0 +1,7 @@
+page_objects/Stratio_page.class
+page_objects/Governance_page.class
+steps/MyStepdefs.class
+page_objects/Google_Search_page.class
+page_objects/Google_page.class
+page_objects/Base_page.class
+runner/RunnerCucumber.class
